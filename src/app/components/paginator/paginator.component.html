@@ -1,0 +1,11 @@
+<div class="paginator">
+  
+    <button (click)="previousPage()" [disabled]="currentPage === 0"> &larr;  Previous </button>
+    <span>  Current page {{ currentPage + 1 }} </span>
+    <button (click)="nextPage()" [disabled]="isLastPage"> &rarr;  Next </button>
+    <div>
+        <div *ngFor="let pageNumber of totalPages; let i = index">
+            <span>{{ i + 1 }}</span>
+        </div>
+    </div>
+</div>

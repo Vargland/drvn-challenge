@@ -1,0 +1,8 @@
+<div *ngIf="products$ | async as products">
+    <div  *ngFor="let product of products.products">
+        <div>{{ product.title }}</div>
+        <div>{{ product.description }}</div>
+    </div>
+
+    <app-paginator [limit]="limit" [totalItems]="totalItems" (currentPage$)="getCurrentPage($event)"></app-paginator>
+</div>

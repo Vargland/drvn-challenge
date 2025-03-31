@@ -1,0 +1,1 @@
+export { default as PaginatorComponent } from './paginator/paginator.component'
