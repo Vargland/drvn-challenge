@@ -28,6 +28,7 @@
       "@pages": ["app/pages"],
       "@services": ["app/services"],
       "@typing/*": ["app/typing/*"],
+      "@utils": ["app/utils"],
     }
   },
   "angularCompilerOptions": {
