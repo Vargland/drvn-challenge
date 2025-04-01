@@ -1,0 +1,12 @@
+<div class="sidebar">
+    <h3  class="sidebar__title">{{ title() }}</h3>
+    <div class="sidebar__list">
+        <ul>
+            @for (item of items(); track item) {
+            <li class="sidebar__list__item" (click)="onHandleClick(item)">
+                {{ item }}
+            </li>
+            }
+        </ul>
+    </div>
+</div>

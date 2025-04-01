@@ -9,7 +9,7 @@ import { ProductResponse } from "@typing/product";
 @Injectable({
     providedIn: 'root',
 })
-export class ProductServices {
+export default class ProductServices {
     private product: BehaviorSubject<ProductResponse> = new BehaviorSubject<ProductResponse>({} as ProductResponse)
 
     public product$: Observable<ProductResponse> = this.product.asObservable()

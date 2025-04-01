@@ -83,7 +83,7 @@ export default class ProductsComponent implements OnInit {
   }
 
   private getProductBy(filters: FilterProducts) {
-    this.productsServices.getBy(filters)
+    this.productsServices.getByFilter(filters)
       .pipe(
         tap((response) => {
           if (this.limit !== Number(this.filters.limit)) {

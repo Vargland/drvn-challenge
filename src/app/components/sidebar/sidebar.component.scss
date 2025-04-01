@@ -1,0 +1,26 @@
+.sidebar {
+    width: 250px;
+    background-color: #f5f5f5;
+    padding: 1rem;
+    height: 100%;
+
+    &__list {
+        list-style: none;
+        padding: 0;
+
+        &__item {
+            padding: 0.5rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #e0e0e0;
+            }
+
+            &.selected {
+                background-color: #d0d0d0;
+                font-weight: bold;
+            }
+        }
+
+    }
+}

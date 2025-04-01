@@ -1,3 +1,4 @@
-export { ProductServices } from './product.service'
-export { ProductsServices } from './products.service'
+export { default as CategoryServices } from './category.service'
+export { default as ProductServices } from './product.service'
+export { default as ProductsServices } from './products.service'
 export { default as LoaderInterceptor } from './loader-interceptor'
