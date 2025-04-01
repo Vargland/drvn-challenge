@@ -1,4 +1,8 @@
-import { EMPTY } from "rxjs";
+interface Dimensions {
+    depth: number;
+    height: number;
+    width: number;
+}
 
 interface Review {
     comment: string;
@@ -8,12 +12,6 @@ interface Review {
     reviewerName: string;
 }
 
-interface Dimensions {
-    width: number;
-    height: number;
-    depth: number;
-}
-
 interface Meta {
     barcode: string;
     createdAt: string;
@@ -21,7 +19,7 @@ interface Meta {
     updatedAt: string;
 }
 
-interface Product {
+interface ProductResponse {
     availabilityStatus: string;
     brand: string;
     category: string;
@@ -46,36 +44,6 @@ interface Product {
     weight: number;
 }
 
-interface ProductsResponse {
-    limit: number;
-    products: Product[];
-    skip: number;
-    total: number;
-}
-
-type ProductsQueryParams = {
-    limit: string;
-    order: string;
-    search: string;
-    skip: string;
-}
-
-type FilterProducts = ProductsQueryParams
-
-export enum PRODUCTS_FILTER {
-    EMPTY = '',
-    LIMIT = '10',
-    ORDER = '10',
-    SKIP = '0',
-    SORT = 'asc',
-}
-
 export type {
-    Dimensions,
-    FilterProducts,
-    Meta,
-    Product,
-    ProductsQueryParams,
-    ProductsResponse,
-    Review,
+    ProductResponse
 }

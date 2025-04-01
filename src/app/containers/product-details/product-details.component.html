@@ -1,0 +1,28 @@
+<div class="product">
+    <div class="product__images">
+        <div *ngFor="let image of images()">
+            <img [src]="image ?? 'assets/no-image.png'" [alt]="title()" width="200" height="200">
+        </div>
+    </div>
+    <div>
+        <h3>{{ title() }}</h3>
+        <p>{{ brand() }} </p>
+    </div>
+    <div>
+        <span>${{ price() }}</span>
+        <span> stock: {{ stock() }} </span>
+    </div>
+    <div>
+        {{ description() }}
+    </div>
+
+    <div>Tags:
+        <span *ngFor="let tag of tags()"> {{ tag }}</span>
+    </div>
+    <div>
+        Weight: {{ weight() }}
+    </div>
+    <div>
+        Warranty: {{ warrantyInformation() }}
+    </div>
+</div>

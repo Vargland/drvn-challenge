@@ -1,0 +1,13 @@
+<div *ngIf="product$ | async as product">
+    <app-product-details
+        [brand]="product.brand"
+        [description]="product.description"
+        [images]="product.images"
+        [title]="product.title"
+        [price]="product.price"
+        [stock]="product.stock"
+        [tags]="product.tags"
+        [warrantyInformation]="product.warrantyInformation"
+        [weight]="product.weight"
+    />
+</div>

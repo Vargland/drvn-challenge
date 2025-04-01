@@ -4,9 +4,9 @@ import { BehaviorSubject, Observable, tap } from "rxjs";
 
 import { api } from "constants/api";
 import { ENVIROMENT } from "@environments/enviroment";
-import { ProductQueryParams, ProductResponse } from "@typing/products";
+import { ProductsQueryParams, ProductsResponse } from "@typing/products";
 
-const buildProductsQueryParams = (url: string, filters: ProductQueryParams): string => {
+const buildProductsQueryParams = (url: string, filters: ProductsQueryParams): string => {
     const newUrl = new URL(url)
 
     newUrl.searchParams?.append('q', filters.search)
@@ -21,24 +21,24 @@ const buildProductsQueryParams = (url: string, filters: ProductQueryParams): str
     providedIn: 'root',
 })
 export class ProductsServices {
-    private product: BehaviorSubject<ProductResponse> = new BehaviorSubject<ProductResponse>({} as ProductResponse)
+    private products: BehaviorSubject<ProductsResponse> = new BehaviorSubject<ProductsResponse>({} as ProductsResponse)
 
-    public product$: Observable<ProductResponse> = this.product.asObservable()
+    public products$: Observable<ProductsResponse> = this.products.asObservable()
 
     constructor(private http: HttpClient) {}
 
-    public getAll = (): Observable<ProductResponse> => {
-        return this.http.get<ProductResponse>(`${ENVIROMENT.apiUrl}/${api.PRODUCTS}`)
-            .pipe(tap(response => this.product.next(response)))
+    public getAll = (): Observable<ProductsResponse> => {
+        return this.http.get<ProductsResponse>(`${ENVIROMENT.apiUrl}/${api.PRODUCTS}`)
+            .pipe(tap(response => this.products.next(response)))
     }
 
-    public getBy = (params: ProductQueryParams): Observable<ProductResponse> => {
+    public getBy = (params: ProductsQueryParams): Observable<ProductsResponse> => {
         const apiUrl = params.search ? `${ENVIROMENT.apiUrl}/${api.PRODUCTS}/${api.SEARCH}` : `${ENVIROMENT.apiUrl}/${api.PRODUCTS}`
 
         const URL = buildProductsQueryParams(apiUrl, params)
 
-        return this.http.get<ProductResponse>(URL)
-            .pipe(tap(response => this.product.next(response)))
+        return this.http.get<ProductsResponse>(URL)
+            .pipe(tap(response => this.products.next(response)))
     }
 }
 

@@ -10,6 +10,7 @@
                 [rating]="product.rating"
                 [stock]="product.stock"
                 [thumbnailSrc]="product.thumbnail"
+                (productClicked)="navigateTo($event)"
             />
         </div>
     </div>

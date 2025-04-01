@@ -1,13 +1,15 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
-import { FilterProduct, ProductResponse, PRODUCTS_FILTER } from '@typing/products';
+import { FilterProducts, ProductsResponse, PRODUCTS_FILTER } from '@typing/products';
 import { Observable, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 import { ProductsServices } from '@services';
 import { PaginatorComponent, SearchInputComponent } from '@components';
 import { ProductCardComponent } from '@containers';
+import { Router } from '@angular/router';
+import { paths } from '@constants/paths';
 
-const FILTERS: FilterProduct = {
+const FILTERS: FilterProducts = {
   limit: PRODUCTS_FILTER.LIMIT,
   order: PRODUCTS_FILTER.SORT,
   search: PRODUCTS_FILTER.EMPTY,
@@ -25,19 +27,22 @@ const FILTERS: FilterProduct = {
 })
 
 export default class ProductsComponent implements OnInit {
-  constructor(private productsServices: ProductsServices) { }
+  constructor(
+    private productsServices: ProductsServices,
+    private router: Router,
+  ) { }
 
-  public limit: number = 10
-  public products$!: Observable<ProductResponse>
-  public totalItems: number = 0
   public currentPage: number = 0
+  public limit: number = 10
+  public products$!: Observable<ProductsResponse>
+  public totalItems: number = 0
 
   private filters = FILTERS
 
   public ngOnInit(): void {
     this.getProductBy(FILTERS)
 
-    this.products$ = this.productsServices.product$
+    this.products$ = this.productsServices.products$
   }
 
   public onChangePage(page: number): void {
@@ -51,13 +56,13 @@ export default class ProductsComponent implements OnInit {
     this.getProductBy(this.filters)
   }
 
-  public onChangeSearch(searchValue: string) {
+  public onChangeSearch(searchValue: string): void {
     this.filters = {
       ...this.filters,
       skip: '0',
       search: searchValue
     }
-    console.log(searchValue)
+
     this.getProductBy(this.filters)
   }
 
@@ -73,7 +78,11 @@ export default class ProductsComponent implements OnInit {
     this.getProductBy(this.filters)
   }
 
-  private getProductBy(filters: FilterProduct) {
+  public navigateTo(id: number): void {
+    this.router.navigate([paths.PRODUCT], { queryParams: { id } })
+  }
+
+  private getProductBy(filters: FilterProducts) {
     this.productsServices.getBy(filters)
       .pipe(
         tap((response) => {
