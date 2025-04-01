@@ -1,8 +1,15 @@
 <div *ngIf="products$ | async as products">
-    <div  *ngFor="let product of products.products">
-        <div>{{ product.title }}</div>
-        <div>{{ product.description }}</div>
+    <app-search-input (search)="onChangeSearch($event)" />
+    <div *ngFor="let product of products.products">
+        <div>{{ product.id }}</div>
     </div>
 
-    <app-paginator [limit]="limit" [totalItems]="totalItems" (currentPage$)="getCurrentPage($event)"></app-paginator>
+    <app-paginator 
+        [currentPage]="currentPage"
+        [itemsPerPage]="limit"
+        [totalItems]="totalItems"
+        [pageSizeOptions]="10"
+        (pageChanged$)="onChangePage($event)"
+        (pageChangedSize$)="onChangePageSize($event)" 
+    />
 </div>

@@ -1,11 +1,40 @@
-<div class="paginator">
-  
-    <button (click)="previousPage()" [disabled]="currentPage === 0"> &larr;  Previous </button>
-    <span>  Current page {{ currentPage + 1 }} </span>
-    <button (click)="nextPage()" [disabled]="isLastPage"> &rarr;  Next </button>
-    <div>
-        <div *ngFor="let pageNumber of totalPages; let i = index">
-            <span>{{ i + 1 }}</span>
-        </div>
+<nav class="paginator" *ngIf="totalPages() > 0">
+    <div class="paginator__page-info">
+        Showing {{ startItem() }} to {{ endItem() }} of {{ totalItems() }} entries
+        in a list size of
+        <select class="paginator__page-info__select" [(ngModel)]="selectedPageSize" (change)="onPageSizeChange()">
+            <option *ngFor="let size of availablePageSizes" [value]="size">{{ size }}</option>
+        </select>
     </div>
-</div>
+    <ul class="paginator__pagination">
+        <li class="paginator__page-item" [class.disabled]="currentPage() === 0">
+            <button (click)="setPage(0)" [disabled]="currentPage() === 0">
+                &laquo;
+            </button>
+        </li>
+        <li class="paginator__page-item" [class.disabled]="currentPage() === 0">
+            <button (click)="setPage(currentPage() - 1)" [disabled]="currentPage() === 0">
+                &lsaquo;
+            </button>
+        </li>
+
+        <ng-container *ngFor="let page of visiblePages()">
+            <li class="paginator__page-item" [class.active]="page === currentPage() + 1">
+                <button (click)="setPage(page - 1)">
+                    {{ page }}
+                </button>
+            </li>
+        </ng-container>
+
+        <li class="paginator__page-item" [class.disabled]="currentPage() === totalPages() - 1">
+            <button (click)="setPage(currentPage() + 1)" [disabled]="currentPage() === totalPages() - 1">
+                &rsaquo;
+            </button>
+        </li>
+        <li class="paginator__page-item" [class.disabled]="currentPage() === totalPages() - 1">
+            <button (click)="setPage(totalPages() - 1)" [disabled]="currentPage() === totalPages() - 1">
+                &raquo;
+            </button>
+        </li>
+    </ul>
+</nav>

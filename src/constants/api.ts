@@ -1,3 +1,4 @@
 export const api = {
-    PRODUCTS: 'products'
+    PRODUCTS: 'products',
+    SEARCH: 'search'
 }

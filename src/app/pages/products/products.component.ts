@@ -4,7 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 import { ProductsServices } from '@services';
-import { PaginatorComponent } from '@components';
+import { PaginatorComponent, SearchInputComponent } from '@components';
 
 const FILTERS: FilterProduct = {
   limit: PRODUCTS_FILTER.LIMIT,
@@ -16,7 +16,7 @@ const FILTERS: FilterProduct = {
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, PaginatorComponent],
+  imports: [CommonModule, PaginatorComponent, SearchInputComponent],
   providers: [ProductsServices],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
@@ -26,9 +26,12 @@ const FILTERS: FilterProduct = {
 export default class ProductsComponent implements OnInit {
   constructor(private productsServices: ProductsServices) { }
 
+  private filters = FILTERS
+
   public limit: number = 10
   public products$!: Observable<ProductResponse>
   public totalItems: number = 0
+  public currentPage: number = 0
 
   public ngOnInit(): void {
     this.getProductBy(FILTERS)
@@ -36,20 +39,47 @@ export default class ProductsComponent implements OnInit {
     this.products$ = this.productsServices.product$
   }
 
-  public getCurrentPage(currentPage: number): void {
-    this.getProductBy({ skip: currentPage.toString() } as FilterProduct)
-  }
+  public onChangePage(page: number): void {
+    this.currentPage = page;
 
-  private getProductBy(filter: FilterProduct) {
-    const currentFilters = {
-      ...FILTERS,
-      ...filter
+    this.filters = {
+      ...this.filters,
+      skip: `${page * this.limit}`,
     }
 
-    this.productsServices.getBy(currentFilters)
+    this.getProductBy(this.filters)
+  }
+
+  public onChangeSearch(searchValue: string) {
+    this.filters = {
+      ...this.filters,
+      skip: '0',
+      search: searchValue
+    }
+    console.log(searchValue)
+    this.getProductBy(this.filters)
+  }
+
+  public onChangePageSize(size: number): void {
+    this.filters = {
+      ...this.filters,
+      skip: '0',
+      limit: size.toString(),
+    }
+
+    this.currentPage = 0
+
+    this.getProductBy(this.filters)
+  }
+
+  private getProductBy(filters: FilterProduct) {
+    this.productsServices.getBy(filters)
       .pipe(
         tap((response) => {
-          this.limit = response.limit
+          if (this.limit !== Number(this.filters.limit)) {
+            this.limit = response.limit
+          }
+
           this.totalItems = response.total
         })
       ).subscribe()

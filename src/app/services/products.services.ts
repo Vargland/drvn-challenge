@@ -9,9 +9,9 @@ import { ProductQueryParams, ProductResponse } from "@typing/products";
 const buildProductsQueryParams = (url: string, filters: ProductQueryParams): string => {
     const newUrl = new URL(url)
 
+    newUrl.searchParams?.append('q', filters.search)
     newUrl.searchParams?.append('limit', filters.limit)
     newUrl.searchParams?.append('order', filters.order)
-    newUrl.searchParams?.append('search', filters.search)
     newUrl.searchParams?.append('skip', filters.skip)
     
     return newUrl.href as unknown as string
@@ -33,7 +33,7 @@ export class ProductsServices {
     }
 
     public getBy = (params: ProductQueryParams): Observable<ProductResponse> => {
-        const apiUrl = `${ENVIROMENT.apiUrl}/${api.PRODUCTS}`
+        const apiUrl = params.search ? `${ENVIROMENT.apiUrl}/${api.PRODUCTS}/${api.SEARCH}` : `${ENVIROMENT.apiUrl}/${api.PRODUCTS}`
 
         const URL = buildProductsQueryParams(apiUrl, params)
 
