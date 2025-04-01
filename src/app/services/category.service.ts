@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, tap } from "rxjs";
+import { BehaviorSubject, map, Observable, startWith, tap } from "rxjs";
 
 import { api } from "constants/api";
 import { ENVIROMENT } from "@environments/enviroment";
@@ -19,6 +19,12 @@ export default class CategoryServices {
         const URL = `${ENVIROMENT.apiUrl}/${api.PRODUCT}/${api.CATEGORY_LIST}`
 
         return this.http.get<string[]>(URL)
-            .pipe(tap(response => this.categoryList.next(response)))
+            .pipe(
+                tap(response => {
+                    response.unshift("ALL")
+
+                    this.categoryList.next(response)}
+                ),
+        )
     }
 }

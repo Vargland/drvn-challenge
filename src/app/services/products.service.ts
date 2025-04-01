@@ -41,8 +41,10 @@ export default class ProductsServices {
             .pipe(tap(response => this.products.next(response)))
     }
 
-    public getByCategory = (category: string): Observable<ProductsResponse> => {
-        const URL = `${ENVIROMENT.apiUrl}/${api.PRODUCTS}/${api.CATEGORY}/${category}`
+    public getByCategory = (category: string, filter: ProductsQueryParams): Observable<ProductsResponse> => {
+        const apiUrl = `${ENVIROMENT.apiUrl}/${api.PRODUCTS}/${api.CATEGORY}/${category}`
+
+        const URL = buildProductsQueryParams(apiUrl, filter)
 
         return this.http.get<ProductsResponse>(URL)
             .pipe(tap(response => this.products.next(response)))

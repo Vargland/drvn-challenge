@@ -1,14 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 
+import { CurrencyFormatPipe, CurrencyService } from '@utils';
+
 @Component({
     selector: 'app-product-card',
-    imports: [CommonModule],
+    imports: [CommonModule, CurrencyFormatPipe],
+    providers: [CurrencyService],
     templateUrl: './product-card.component.html',
-    styleUrl: './product-card.component.scss'
+    styleUrl: './product-card.component.scss',
+    standalone: true,
 })
 
 export default class ProductCardComponent {
+    constructor(public currencyService: CurrencyService) {}
+
     public brand = input<string>('');
     public id = input.required<number>();
     public name = input<string>('');

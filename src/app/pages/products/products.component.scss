@@ -1,8 +1,0 @@
-.product {
-    &__product-card {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: repeat(auto, 1fr);
-        gap: 8px;
-    }
-}

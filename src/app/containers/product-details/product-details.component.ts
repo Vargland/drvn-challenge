@@ -1,9 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, input } from '@angular/core';
 
+import { CurrencyFormatPipe, CurrencyService } from '@utils';
+
 @Component({
     selector: 'app-product-details',
-    imports: [CommonModule],
+    imports: [CommonModule, CurrencyFormatPipe],
+    providers: [CurrencyService],
     templateUrl: './product-details.component.html',
     styleUrl: './product-details.component.scss',
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -3,7 +3,7 @@
     <h3 [class]="getStockStatusClass()">{{ name() }}</h3>
     <p>{{ brand() }}</p>
     <div class="product-card__price">
-        <span class="price">${{ price() }}</span>
+        <span class="price">{{ price() | currency }}  </span>
     </div>
     <div class="product-card__rating">
         <span *ngIf="rating() !== null">

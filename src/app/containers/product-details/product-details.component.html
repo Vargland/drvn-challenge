@@ -9,7 +9,7 @@
         <p>{{ brand() }} </p>
     </div>
     <div>
-        <span>${{ price() }}</span>
+        <span>{{ price() | currency }}</span>
         <span> stock: {{ stock() }} </span>
     </div>
     <div>

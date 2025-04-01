@@ -1,5 +1,38 @@
-<div>
+<div class="home">
     <div *ngIf="categories$ | async as categories">
-        <app-sidebar [items]="categories" title="Categories" (onClickItem)="handleClickCategory($event)"/>
+        <div class="home__sidebar">
+            <app-sidebar [items]="categories" title="Categories" (onClickItem)="handleClickCategory($event)"/>
+        </div>
     </div>
+    <div *ngIf="products$ | async as products">
+        <div class="home__products">
+            <div class="home__products__header">
+                <app-search-input (search)="onChangeSearch($event)" />
+            </div>
+            <div  class="home__product-card">
+                <div *ngFor="let product of products.products" >
+                    <app-product-card
+                        [brand]="product.brand"
+                        [id]="product.id"
+                        [name]="product.title"
+                        [price]="product.price"
+                        [rating]="product.rating"
+                        [stock]="product.stock"
+                        [thumbnailSrc]="product.thumbnail"
+                        (productClicked)="navigateTo($event)"
+                    />
+                </div>
+            </div>
+
+            <app-paginator
+                [currentPage]="currentPage"
+                [itemsPerPage]="limit"
+                [totalItems]="totalItems"
+                [pageSizeOptions]="10"
+                (pageChanged$)="onChangePage($event)"
+                (pageChangedSize$)="onChangePageSize($event)" 
+            />
+        </div>
+    </div>
+
 </div>
