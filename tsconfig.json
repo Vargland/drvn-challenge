@@ -21,7 +21,7 @@
     "paths": {
       "@assets/*": ["assets/*"],
       "@components": ["app/components"],
-      "@containers/*": ["app/containers/*"],
+      "@containers": ["app/containers"],
       "@constants/*": ["constants/*"],
       "@core/*": ["app/core/*"],
       "@environments/*": ["environments/*"],

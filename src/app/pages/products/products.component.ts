@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import { ProductsServices } from '@services';
 import { PaginatorComponent, SearchInputComponent } from '@components';
+import { ProductCardComponent } from '@containers';
 
 const FILTERS: FilterProduct = {
   limit: PRODUCTS_FILTER.LIMIT,
@@ -16,7 +17,7 @@ const FILTERS: FilterProduct = {
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, PaginatorComponent, SearchInputComponent],
+  imports: [CommonModule, PaginatorComponent, SearchInputComponent, ProductCardComponent],
   providers: [ProductsServices],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
@@ -26,12 +27,12 @@ const FILTERS: FilterProduct = {
 export default class ProductsComponent implements OnInit {
   constructor(private productsServices: ProductsServices) { }
 
-  private filters = FILTERS
-
   public limit: number = 10
   public products$!: Observable<ProductResponse>
   public totalItems: number = 0
   public currentPage: number = 0
+
+  private filters = FILTERS
 
   public ngOnInit(): void {
     this.getProductBy(FILTERS)

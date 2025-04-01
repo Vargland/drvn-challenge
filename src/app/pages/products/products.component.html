@@ -1,7 +1,17 @@
 <div *ngIf="products$ | async as products">
     <app-search-input (search)="onChangeSearch($event)" />
-    <div *ngFor="let product of products.products">
-        <div>{{ product.id }}</div>
+    <div  class="product__product-card">
+        <div *ngFor="let product of products.products">
+            <app-product-card
+                [brand]="product.brand"
+                [id]="product.id"
+                [name]="product.title"
+                [price]="product.price"
+                [rating]="product.rating"
+                [stock]="product.stock"
+                [thumbnailSrc]="product.thumbnail"
+            />
+        </div>
     </div>
 
     <app-paginator 
