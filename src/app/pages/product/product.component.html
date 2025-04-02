@@ -1,13 +1,6 @@
-<div *ngIf="product$ | async as product">
-    <app-product-details
-        [brand]="product.brand"
-        [description]="product.description"
-        [images]="product.images"
-        [title]="product.title"
-        [price]="product.price"
-        [stock]="product.stock"
-        [tags]="product.tags"
-        [warrantyInformation]="product.warrantyInformation"
-        [weight]="product.weight"
-    />
+<div class="product">
+
+    <div *ngIf="product$ | async as product">
+        <app-product-details [product]="product" (save)="onProductSave($event)" (cancel)="onEditCancel()" />
+    </div>
 </div>

@@ -44,6 +44,12 @@ interface ProductResponse {
     weight: number;
 }
 
+type Product = Pick<ProductResponse, 'brand' | 'description' | 'images' | 'price' | 'stock' | 'title' | 'tags' | 'warrantyInformation' | 'weight' >
+
+type ProductPayload = Pick<Product, 'description' | 'price' | 'stock' | 'title'>
+
 export type {
-    ProductResponse
+    Product,
+    ProductPayload,
+    ProductResponse,
 }

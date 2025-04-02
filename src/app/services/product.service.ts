@@ -16,10 +16,14 @@ export default class ProductServices {
 
     constructor(private http: HttpClient) {}
 
-    public get = (id: number | string): Observable<ProductResponse> => {
+    public getProduct = (id: number | string): Observable<ProductResponse> => {
         const URL = `${ENVIROMENT.apiUrl}/${api.PRODUCT}/${id}`
 
         return this.http.get<ProductResponse>(URL)
             .pipe(tap(response => this.product.next(response)))
+    }
+
+    public editProduct() {
+        return 
     }
 }
