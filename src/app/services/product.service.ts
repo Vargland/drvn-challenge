@@ -1,10 +1,10 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, tap } from "rxjs";
+import { HttpClient } from "@angular/common/http"
+import { Injectable } from "@angular/core"
+import { BehaviorSubject, catchError, Observable, of, tap, throwError } from "rxjs"
 
-import { api } from "constants/api";
-import { ENVIROMENT } from "@environments/enviroment";
-import { ProductResponse } from "@typing/product";
+import { api } from "constants/api"
+import { ENVIROMENT } from "@environments/enviroment"
+import { ProductPayload, ProductResponse } from "@typing/product"
 
 @Injectable({
     providedIn: 'root',
@@ -23,7 +23,20 @@ export default class ProductServices {
             .pipe(tap(response => this.product.next(response)))
     }
 
-    public editProduct() {
-        return 
+    public editProduct(product: ProductPayload): Observable<ProductResponse> {
+        const random = Math.round(Math.random())
+
+        const mockRequest$ = random === 1 
+            ? of('Success!')
+            : throwError(() => new Error('Failure!'))
+        
+        return mockRequest$.pipe(
+            tap((response: any) => {
+                return response
+            }),
+            catchError(error => {
+                return throwError(() => error)
+            })
+        )
     }
 }

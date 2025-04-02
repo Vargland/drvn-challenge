@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core'
 
 @Component({
     selector: 'app-sidebar',
@@ -8,12 +8,12 @@ import { Component, input, output } from '@angular/core';
 })
 
 export default class SidebarComponent {
-  public items = input<string[]>();
-  public title = input<string>();
+  public items = input<string[]>()
+  public title = input<string>()
 
-  public onClickItem = output<string>();
+  public onClickItem = output<string>()
 
   public onHandleClick(item: string) {
-    this.onClickItem.emit(item);
+    this.onClickItem.emit(item)
   }
 }

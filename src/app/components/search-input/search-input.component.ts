@@ -1,5 +1,5 @@
-import { Component, output, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, output, signal } from '@angular/core'
+import { FormsModule } from '@angular/forms'
 
 @Component({
   selector: 'app-search-input',

@@ -1,11 +1,11 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, tap } from "rxjs";
+import { HttpClient } from "@angular/common/http"
+import { Injectable } from "@angular/core"
+import { BehaviorSubject, Observable, tap } from "rxjs"
 
-import { api } from "constants/api";
-import { ENVIROMENT } from "@environments/enviroment";
-import { FilterProducts, ProductsResponse } from "@typing/products";
-import { queryBuilder } from "@utils";
+import { api } from "constants/api"
+import { ENVIROMENT } from "@environments/enviroment"
+import { FilterProducts, ProductsResponse } from "@typing/products"
+import { queryBuilder } from "@utils"
 
 @Injectable({
     providedIn: 'root',

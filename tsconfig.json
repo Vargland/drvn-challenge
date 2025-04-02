@@ -25,6 +25,7 @@
       "@constants/*": ["constants/*"],
       "@core/*": ["app/core/*"],
       "@environments/*": ["environments/*"],
+      "@mocks/*": ["app/mocks/*"],
       "@pages": ["app/pages"],
       "@services": ["app/services"],
       "@typing/*": ["app/typing/*"],

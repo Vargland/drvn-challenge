@@ -1,7 +1,7 @@
 // src/app/services/currency.service.ts
-import { Injectable } from '@angular/core';
-import { CONVERSION_RATE, Currency, CURRENCY_SYMBOL } from '@typing/currency';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable } from '@angular/core'
+import { CONVERSION_RATE, Currency, CURRENCY_SYMBOL } from '@typing/currency'
+import { BehaviorSubject, Observable } from 'rxjs'
 
 @Injectable({
     providedIn: 'root'

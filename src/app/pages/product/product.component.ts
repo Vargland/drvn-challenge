@@ -1,12 +1,12 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
-import { ProductServices } from '@services';
-import { ActivatedRoute } from '@angular/router';
-import { Observable, switchMap } from 'rxjs';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core'
+import { ProductServices } from '@services'
+import { ActivatedRoute } from '@angular/router'
+import { Observable, switchMap } from 'rxjs'
+import { CommonModule } from '@angular/common'
+import { FormsModule } from '@angular/forms'
 
-import { ProductDetailsComponent } from '@containers';
-import { ProductPayload, ProductResponse } from '@typing/product';
+import { ProductDetailsComponent } from '@containers'
+import { ProductPayload, ProductResponse } from '@typing/product'
 
 @Component({
     selector: 'app-product',
@@ -28,16 +28,16 @@ export default class ProductComponent implements OnInit {
         this.activatedRoute.queryParams
             .pipe(
                 switchMap((params) => this.productServices.getProduct(params['id']))
-            ).subscribe();
+            ).subscribe()
 
         this.product$ = this.productServices.product$
     }
 
     public onProductSave(product: ProductPayload) {
-        console.log(product)
+        this.productServices.editProduct(product).subscribe()
     }
 
     public onEditCancel() {
-        console.log(this.product$.subscribe())
+        return
     }
 }

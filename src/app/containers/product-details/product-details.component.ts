@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, input, OnInit, output, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Product, ProductPayload, ProductResponse } from '@typing/product';
+import { CommonModule } from '@angular/common'
+import { Component, CUSTOM_ELEMENTS_SCHEMA, input, OnInit, output, signal } from '@angular/core'
+import { FormsModule } from '@angular/forms'
+import { Product, ProductPayload, ProductResponse } from '@typing/product'
 
-import { CurrencyFormatPipe, CurrencyService } from '@utils';
+import { CurrencyFormatPipe, CurrencyService } from '@utils'
 
 @Component({
     selector: 'app-product-details',
@@ -15,8 +15,8 @@ import { CurrencyFormatPipe, CurrencyService } from '@utils';
 })
 
 export default class ProductDetailsComponent implements OnInit {
-    public editableProduct = signal<ProductPayload>(this.getEmptyProduct());
-    public isEditMode = signal<boolean>(false);
+    public editableProduct = signal<ProductPayload>(this.getEmptyProduct())
+    public isEditMode = signal<boolean>(false)
 
     public product = input.required<ProductResponse>()
 
@@ -31,18 +31,18 @@ export default class ProductDetailsComponent implements OnInit {
         this.isEditMode.update(mode => !mode)
 
         if (this.isEditMode()) {
-            this.editableProduct.set(this.extractEditableFields(this.product()));
+            this.editableProduct.set(this.extractEditableFields(this.product()))
         }
     }
 
     public onSubmit() {
-        this.save.emit(this.editableProduct());
+        this.save.emit(this.editableProduct())
         this.isEditMode.set(false)
     }
 
     public onCancel() {
-        this.isEditMode.set(false);
-        this.cancel.emit();
+        this.isEditMode.set(false)
+        this.cancel.emit()
     }
 
     private extractEditableFields(product: ProductResponse): ProductPayload {
@@ -51,7 +51,7 @@ export default class ProductDetailsComponent implements OnInit {
             price: product.price,
             stock: product.stock,
             title: product.title,
-        };
+        }
     }
 
     private getEmptyProduct(): Product {
@@ -65,8 +65,6 @@ export default class ProductDetailsComponent implements OnInit {
             tags: [],
             warrantyInformation: '',
             weight: 0
-        };
+        }
     }
-
-
 }

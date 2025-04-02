@@ -1,14 +1,14 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
-import { FilterProducts, ProductsResponse, PRODUCTS_FILTER } from '@typing/products';
-import { Observable, tap } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core'
+import { FilterProducts, ProductsResponse, PRODUCTS_FILTER } from '@typing/products'
+import { Observable, tap } from 'rxjs'
+import { CommonModule } from '@angular/common'
 
-import { CategoryServices, ProductsServices } from '@services';
-import { PaginatorComponent, SearchInputComponent, SidebarComponent } from '@components';
-import { ProductCardComponent } from '@containers';
-import { Router } from '@angular/router';
-import { paths } from '@constants/paths';
-import { Category } from '@typing/category';
+import { CategoryServices, ProductsServices } from '@services'
+import { PaginatorComponent, SearchInputComponent, SidebarComponent } from '@components'
+import { ProductCardComponent } from '@containers'
+import { Router } from '@angular/router'
+import { paths } from '@constants/paths'
+import { Category } from '@typing/category'
 
 const FILTERS: FilterProducts = {
     category: Category.DEFAULT,
@@ -26,9 +26,9 @@ const FILTERS: FilterProducts = {
         PaginatorComponent,
         SearchInputComponent,
         ProductCardComponent,
-        SidebarComponent
+        SidebarComponent,
     ],
-    providers: [CategoryServices, ProductsServices],
+    providers: [CategoryServices, ProductsServices, Router],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -48,7 +48,7 @@ export default class HomeComponent implements OnInit {
     public limit: number = 10
     public totalItems: number = 0
 
-    private filters = FILTERS
+    public filters = FILTERS
 
     public ngOnInit(): void {
         this.categoryServices.getCategoryList().subscribe()
@@ -59,7 +59,7 @@ export default class HomeComponent implements OnInit {
     }
 
     public onChangePage(page: number): void {
-        this.currentPage = page;
+        this.currentPage = page
 
         this.filters = {
             ...this.filters,
@@ -129,7 +129,5 @@ export default class HomeComponent implements OnInit {
                     })
                 ).subscribe()
         }
-
-
     }
 }

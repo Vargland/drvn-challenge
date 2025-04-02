@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { PaginatorComponent } from './paginator.component';
+import PaginatorComponent from './paginator.component'
 
 describe('PaginatorComponent', () => {
-  let component: PaginatorComponent;
-  let fixture: ComponentFixture<PaginatorComponent>;
+  let component: PaginatorComponent
+  let fixture: ComponentFixture<PaginatorComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PaginatorComponent]
     })
-    .compileComponents();
+    .compileComponents()
 
-    fixture = TestBed.createComponent(PaginatorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(PaginatorComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

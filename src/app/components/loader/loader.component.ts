@@ -1,7 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { CommonModule } from '@angular/common'
+import { Component, ViewEncapsulation } from '@angular/core'
 
-import { LoaderService } from '@utils';
+import { LoaderService } from '@utils'
 
 @Component({
     selector: 'app-loader',

@@ -1,10 +1,10 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, map, Observable, startWith, tap } from "rxjs";
+import { HttpClient } from "@angular/common/http"
+import { Injectable } from "@angular/core"
+import { BehaviorSubject, map, Observable, startWith, tap } from "rxjs"
 
-import { api } from "constants/api";
-import { ENVIROMENT } from "@environments/enviroment";
-import { Category } from "@typing/category";
+import { api } from "constants/api"
+import { ENVIROMENT } from "@environments/enviroment"
+import { Category } from "@typing/category"
 
 @Injectable({
     providedIn: 'root',

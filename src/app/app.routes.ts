@@ -1,8 +1,8 @@
-import { Routes } from '@angular/router';
-import { paths } from '@constants/paths';
-import { HomeComponent, ProductComponent } from '@pages';
+import { Routes } from '@angular/router'
+import { paths } from '@constants/paths'
+import { HomeComponent, ProductComponent } from '@pages'
 
 export const routes: Routes = [
     { path: paths.ROOT, component: HomeComponent },
     { path: paths.PRODUCT, component: ProductComponent },
-];
+]

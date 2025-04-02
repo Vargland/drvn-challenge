@@ -1,7 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import { CommonModule } from '@angular/common'
+import { Component, input, output } from '@angular/core'
 
-import { CurrencyFormatPipe, CurrencyService } from '@utils';
+import { CurrencyFormatPipe, CurrencyService } from '@utils'
 
 @Component({
     selector: 'app-product-card',
@@ -15,24 +15,24 @@ import { CurrencyFormatPipe, CurrencyService } from '@utils';
 export default class ProductCardComponent {
     constructor(public currencyService: CurrencyService) {}
 
-    public brand = input<string>('');
-    public id = input.required<number>();
-    public name = input<string>('');
-    public price = input<number>(0);
-    public rating = input<number | null>(null);
+    public brand = input<string>('')
+    public id = input.required<number>()
+    public name = input<string>('')
+    public price = input<number>(0)
+    public rating = input<number | null>(null)
     public stock = input<number>(0)
-    public thumbnailSrc = input<string | null>(null);
+    public thumbnailSrc = input<string | null>(null)
     public noImage: string = 'assets/images/noimage.png'
     
-    public productClicked = output<number>();
+    public productClicked = output<number>()
 
     public handleImageError(event: Event): void {
-        const imgElement = event.target as HTMLImageElement;
+        const imgElement = event.target as HTMLImageElement
         imgElement.src = this.noImage
     }
 
     public onClickProduct(): void {
-        this.productClicked.emit(this.id());
+        this.productClicked.emit(this.id())
     }
 
     public getStockStatusClass(): string {

@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common'
+import { Component } from '@angular/core'
+import { FormsModule } from '@angular/forms'
 
-import { Currency } from '@typing/currency';
-import { CurrencyService } from '@utils';
+import { Currency } from '@typing/currency'
+import { CurrencyService } from '@utils'
 
 @Component({
     selector: 'app-currency-selector',
@@ -16,16 +16,16 @@ export default class CurrencySelectorComponent {
     constructor(private currencyService: CurrencyService) { }
 
     public eur = Currency.EUR
-    public selectedCurrency: Currency.USD | Currency.EUR = Currency.USD;
+    public selectedCurrency: Currency.USD | Currency.EUR = Currency.USD
     public usd = Currency.USD
 
     public ngOnInit(): void {
         this.currencyService.currency$.subscribe(currency => {
-            this.selectedCurrency = currency;
-        });
+            this.selectedCurrency = currency
+        })
     }
 
     public onCurrencyChange(): void {
-        this.currencyService.setCurrency(this.selectedCurrency);
+        this.currencyService.setCurrency(this.selectedCurrency)
     }
 }
