@@ -1,0 +1,9 @@
+<div class="currency-selector">
+    <div class="currency-selector__container">
+        <label>Currency:</label>
+        <select id="currency" [(ngModel)]="selectedCurrency" (change)="onCurrencyChange()">
+            <option [value]="usd">USD ($)</option>
+            <option [value]="eur">EUR (€)</option>
+        </select>
+    </div>
+</div>

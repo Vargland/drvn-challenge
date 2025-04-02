@@ -1,0 +1,19 @@
+.home {
+    display: flex;
+
+    &__products {
+        padding: 16px;
+
+        &__header {
+            display: flex;
+            justify-content: space-between ;
+            padding: 16px 0;
+        }
+    }
+
+    &__product-card {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: repeat(5, auto);
+    }
+}

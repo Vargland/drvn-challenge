@@ -1,0 +1,13 @@
+<div class="product-card" (click)="onClickProduct()" title="Click to see more">
+    <img [src]="thumbnailSrc() ?? 'assets/no-image.png'" [alt]="name()" (error)="handleImageError($event)" width="200" height="200">
+    <h3 [class]="getStockStatusClass()">{{ name() }}</h3>
+    <p>{{ brand() }}</p>
+    <div class="product-card__price">
+        <span class="price">{{ price() | currency }}  </span>
+    </div>
+    <div class="product-card__rating">
+        <span *ngIf="rating() !== null">
+            Users thinks: {{ rating() | number:'1.1-1' }}
+        </span>
+    </div>
+</div>

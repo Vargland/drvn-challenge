@@ -1,0 +1,70 @@
+<div class="product-details">
+    <div class="product-details__image-gallery">
+        <h3>Images</h3>
+        <div class="image-grid">
+            <img *ngFor="let image of product().images" [src]="image" alt="Product image" width="300" height="300">
+        </div>
+    </div>
+
+    <form class="product-details__form" *ngIf="isEditMode(); else viewMode" (ngSubmit)="onSubmit()">
+        <div class="product-details__form__item">
+            <label>Title</label>
+            <input [(ngModel)]="editableProduct().title" name="title" required>
+        </div>
+
+        <div class="product-details__form__item">
+            <p><strong>Brand:</strong> {{ product().brand }}</p>
+        </div>
+
+        <div class="product-details__form__item">
+            <label>Description</label>
+            <textarea [(ngModel)]="editableProduct().description" name="description" required></textarea>
+        </div>
+
+        <div class="product-details__form__item">
+            <label>Price</label>
+            <input type="number" [(ngModel)]="editableProduct().price" name="price" required>
+        </div>
+
+        <div class="product-details__form__item">
+            <label>Stock</label>
+            <input type="number" [(ngModel)]="editableProduct().stock" name="stock" required>
+        </div>
+
+        <div class="product-details__form__item">
+            <p><strong>Weight:</strong> {{ product().weight }}</p>
+        </div>
+
+        <div class="product-details__form__item">
+            <p><strong>Warranty:</strong> {{ product().warrantyInformation }}</p>
+        </div>
+
+        <div class="product-details__form__item" *ngIf="product().tags.length > 0">
+            <p><strong>Tags:</strong> {{ product().tags.join(', ') }}</p>
+        </div>
+
+
+        <div class="form-actions">
+            <button type="submit">Save</button>
+            <button type="button" (click)="onCancel()">Cancel</button>
+        </div>
+    </form>
+    <div class="mode-toggle" *ngIf="!isEditMode()">
+        <button type="button" (click)="toggleEditMode()">
+            Edit
+        </button>
+    </div>
+
+    <ng-template #viewMode>
+        <div class="product-details__view">
+            <h2>{{ product().title }}</h2>
+            <p><strong>Brand:</strong> {{ product().brand }}</p>
+            <p><strong>Description:</strong> {{ product().description }}</p>
+            <p><strong>Price:</strong> {{ product().price | currency }}</p>
+            <p><strong>Stock:</strong> {{ product().stock }}</p>
+            <p><strong>Weight:</strong> {{ product().weight }} kg</p>
+            <p><strong>Warranty:</strong> {{ product().warrantyInformation }}</p>
+            <p *ngIf="product().tags"><strong>Tags:</strong> {{ product().tags.join(', ') }}</p>
+        </div>
+    </ng-template>
+</div>

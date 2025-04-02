@@ -1,0 +1,8 @@
+<div>
+    <input
+        type="text"
+        [ngModel]="searchValue()"
+        (ngModelChange)="searchValue.set($event)"
+        (keyup.enter)="onSearch()"
+        placeholder="Search something and press enter">
+</div>

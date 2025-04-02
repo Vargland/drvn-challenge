@@ -1,0 +1,6 @@
+<div class="product">
+
+    <div *ngIf="product$ | async as product">
+        <app-product-details [product]="product" (save)="onProductSave($event)" (cancel)="onEditCancel()" />
+    </div>
+</div>

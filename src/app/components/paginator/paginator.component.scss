@@ -1,0 +1,18 @@
+.paginator {
+    display: flex;
+    flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+
+    &__pagination {
+        display: flex;
+        list-style: none;
+
+        &__page-item {
+        }
+    }
+
+    
+}

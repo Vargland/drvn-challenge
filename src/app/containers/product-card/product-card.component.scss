@@ -1,0 +1,49 @@
+.product-card {
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    transition: box-shadow 0.3s ease;
+
+
+    &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &__name {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+
+        &--out-of-stock {
+            color: #ff3d00;
+        }
+
+        &--low-stock {
+            color: #ffab00;
+        }
+
+        &--in-stock {
+            color: #2962ff;
+        }
+    }
+
+    &__brand {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+    }
+
+    &__price {
+        color: #000;
+        font-weight: bold;
+    }
+
+    &__rating {
+        color: #666;
+        margin-top: 8px;
+    }
+}

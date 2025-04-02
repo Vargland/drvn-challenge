@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core'
+import { RouterOutlet } from '@angular/router'
+import { LoaderComponent } from '@components'
+import { CurrencySelectorComponent } from '@containers'
+import { CurrencyService } from '@utils'
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    standalone: true,
+    imports: [CurrencySelectorComponent, LoaderComponent, RouterOutlet],
+    providers: [CurrencyService],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'drvn-challenge';
+
+export class AppComponent { 
+    constructor() { }
+
 }
