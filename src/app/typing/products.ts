@@ -1,4 +1,4 @@
-import { EMPTY } from "rxjs";
+import { QueryParams } from "./query-builder";
 
 interface Review {
     comment: string;
@@ -53,14 +53,9 @@ interface ProductsResponse {
     total: number;
 }
 
-type ProductsQueryParams = {
-    limit: string;
-    order: string;
-    search: string;
-    skip: string;
+type FilterProducts = QueryParams & {
+    category: string
 }
-
-type FilterProducts = ProductsQueryParams
 
 export enum PRODUCTS_FILTER {
     EMPTY = '',
@@ -75,7 +70,6 @@ export type {
     FilterProducts,
     Meta,
     Product,
-    ProductsQueryParams,
     ProductsResponse,
     Review,
 }

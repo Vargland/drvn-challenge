@@ -8,120 +8,128 @@ import { PaginatorComponent, SearchInputComponent, SidebarComponent } from '@com
 import { ProductCardComponent } from '@containers';
 import { Router } from '@angular/router';
 import { paths } from '@constants/paths';
+import { Category } from '@typing/category';
 
 const FILTERS: FilterProducts = {
-  limit: PRODUCTS_FILTER.LIMIT,
-  order: PRODUCTS_FILTER.SORT,
-  search: PRODUCTS_FILTER.EMPTY,
-  skip: PRODUCTS_FILTER.SKIP,
+    category: Category.DEFAULT,
+    limit: PRODUCTS_FILTER.LIMIT,
+    order: PRODUCTS_FILTER.SORT,
+    search: PRODUCTS_FILTER.EMPTY,
+    skip: PRODUCTS_FILTER.SKIP,
 }
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [
-    CommonModule,
-    PaginatorComponent,
-    SearchInputComponent,
-    ProductCardComponent,
-    SidebarComponent
-  ],
-  providers: [CategoryServices, ProductsServices],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    selector: 'app-home',
+    standalone: true,
+    imports: [
+        CommonModule,
+        PaginatorComponent,
+        SearchInputComponent,
+        ProductCardComponent,
+        SidebarComponent
+    ],
+    providers: [CategoryServices, ProductsServices],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss',
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export default class HomeComponent implements OnInit {
-  constructor(
-    private categoryServices: CategoryServices,
-    private productsServices: ProductsServices,
-    private router: Router,
-  ) { }
+    constructor(
+        private categoryServices: CategoryServices,
+        private productsServices: ProductsServices,
+        private router: Router,
+    ) { }
 
-  public products$!: Observable<ProductsResponse>
-  public categories$!: Observable<string[]>
+    public products$!: Observable<ProductsResponse>
+    public categories$!: Observable<string[]>
 
-  public currentPage: number = 0
-  public limit: number = 10
-  public totalItems: number = 0
+    public currentPage: number = 0
+    public limit: number = 10
+    public totalItems: number = 0
 
-  private filters = FILTERS
+    private filters = FILTERS
 
-  public ngOnInit(): void {
-    this.categoryServices.getCategoryList().subscribe()
-    this.getProductBy(FILTERS)
+    public ngOnInit(): void {
+        this.categoryServices.getCategoryList().subscribe()
+        this.getProductBy(FILTERS)
 
-    this.categories$ = this.categoryServices.categoryList$
-    this.products$ = this.productsServices.products$
-  }
-
-  public onChangePage(page: number): void {
-    this.currentPage = page;
-
-    this.filters = {
-      ...this.filters,
-      skip: `${page * this.limit}`,
+        this.categories$ = this.categoryServices.categoryList$
+        this.products$ = this.productsServices.products$
     }
 
-    this.getProductBy(this.filters)
-  }
+    public onChangePage(page: number): void {
+        this.currentPage = page;
 
-  public onChangeSearch(searchValue: string): void {
-    this.filters = {
-      ...this.filters,
-      skip: '0',
-      search: searchValue
-    }
-
-    this.getProductBy(this.filters)
-  }
-
-  public onChangePageSize(size: number): void {
-    this.filters = {
-      ...this.filters,
-      skip: '0',
-      limit: size.toString(),
-    }
-
-    this.currentPage = 0
-
-    this.getProductBy(this.filters)
-  }
-
-  public navigateTo(id: number): void {
-    this.router.navigate([paths.PRODUCT], { queryParams: { id } })
-  }
-
-  public handleClickCategory(category: string): void {
-    if (category === "ALL") {
-      this.getProductBy(FILTERS)
-
-      return
-    } 
-
-    this.productsServices.getByCategory(category, this.filters)
-    .pipe(
-      tap((response) => {
-        if (this.limit !== Number(this.filters.limit)) {
-          this.limit = response.limit
+        this.filters = {
+            ...this.filters,
+            skip: `${page * this.limit}`,
         }
 
-        this.totalItems = response.total
-      })
-    ).subscribe()
-}
+        this.getProductBy(this.filters)
+    }
 
-  private getProductBy(filters: FilterProducts) {
-    this.productsServices.getByFilter(filters)
-      .pipe(
-        tap((response) => {
-          if (this.limit !== Number(this.filters.limit)) {
-            this.limit = response.limit
-          }
+    public onChangeSearch(searchValue: string): void {
+        this.filters = {
+            ...this.filters,
+            skip: '0',
+            search: searchValue
+        }
 
-          this.totalItems = response.total
-        })
-      ).subscribe()
-  }
+        this.getProductBy(this.filters)
+    }
+
+    public onChangePageSize(size: number): void {
+        this.filters = {
+            ...this.filters,
+            skip: '0',
+            limit: size.toString(),
+        }
+
+        this.currentPage = 0
+
+        this.getProductBy(this.filters)
+    }
+
+    public navigateTo(id: number): void {
+        this.router.navigate([paths.PRODUCT], { queryParams: { id } })
+    }
+
+    public handleClickCategory(category: string): void {
+        this.filters = {
+            ...FILTERS,
+            category
+        }
+
+        this.getProductBy(this.filters)
+
+    }
+
+    private getProductBy(filters: FilterProducts): void {
+        if (filters.category !== Category.DEFAULT) {
+            this.productsServices.getByCategory(filters.category, filters)
+                .pipe(
+                    tap((response) => {
+                        if (this.limit !== Number(this.filters.limit)) {
+                            this.limit = response.limit
+                        }
+
+                        this.totalItems = response.total
+                    })
+                ).subscribe()
+        } else {
+            this.productsServices.getByFilter(filters)
+                .pipe(
+                    tap((response) => {
+                        if (this.limit !== Number(this.filters.limit)) {
+                            this.limit = response.limit
+                        }
+
+                        this.totalItems = response.total
+                    })
+                ).subscribe()
+        }
+
+
+    }
 }

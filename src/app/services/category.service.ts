@@ -4,10 +4,12 @@ import { BehaviorSubject, map, Observable, startWith, tap } from "rxjs";
 
 import { api } from "constants/api";
 import { ENVIROMENT } from "@environments/enviroment";
+import { Category } from "@typing/category";
 
 @Injectable({
     providedIn: 'root',
 })
+
 export default class CategoryServices {
     private categoryList: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([] as string[])
 
@@ -21,7 +23,7 @@ export default class CategoryServices {
         return this.http.get<string[]>(URL)
             .pipe(
                 tap(response => {
-                    response.unshift("ALL")
+                    response.unshift(Category.DEFAULT)
 
                     this.categoryList.next(response)}
                 ),

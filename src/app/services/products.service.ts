@@ -4,18 +4,8 @@ import { BehaviorSubject, Observable, tap } from "rxjs";
 
 import { api } from "constants/api";
 import { ENVIROMENT } from "@environments/enviroment";
-import { ProductsQueryParams, ProductsResponse } from "@typing/products";
-
-const buildProductsQueryParams = (url: string, filters: ProductsQueryParams): string => {
-    const newUrl = new URL(url)
-
-    newUrl.searchParams?.append('q', filters.search)
-    newUrl.searchParams?.append('limit', filters.limit)
-    newUrl.searchParams?.append('order', filters.order)
-    newUrl.searchParams?.append('skip', filters.skip)
-    
-    return newUrl.href as unknown as string
-}
+import { FilterProducts, ProductsResponse } from "@typing/products";
+import { queryBuilder } from "@utils";
 
 @Injectable({
     providedIn: 'root',
@@ -32,19 +22,19 @@ export default class ProductsServices {
             .pipe(tap(response => this.products.next(response)))
     }
 
-    public getByFilter = (filter: ProductsQueryParams): Observable<ProductsResponse> => {
+    public getByFilter = (filter: FilterProducts): Observable<ProductsResponse> => {
         const apiUrl = filter.search ? `${ENVIROMENT.apiUrl}/${api.PRODUCTS}/${api.SEARCH}` : `${ENVIROMENT.apiUrl}/${api.PRODUCTS}`
-
-        const URL = buildProductsQueryParams(apiUrl, filter)
+        
+        const URL = queryBuilder(apiUrl, filter)
 
         return this.http.get<ProductsResponse>(URL)
             .pipe(tap(response => this.products.next(response)))
     }
 
-    public getByCategory = (category: string, filter: ProductsQueryParams): Observable<ProductsResponse> => {
+    public getByCategory = (category: string, filter: FilterProducts): Observable<ProductsResponse> => {
         const apiUrl = `${ENVIROMENT.apiUrl}/${api.PRODUCTS}/${api.CATEGORY}/${category}`
 
-        const URL = buildProductsQueryParams(apiUrl, filter)
+        const URL = queryBuilder(apiUrl, filter)
 
         return this.http.get<ProductsResponse>(URL)
             .pipe(tap(response => this.products.next(response)))
