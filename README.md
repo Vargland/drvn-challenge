@@ -1,5 +1,5 @@
 # DEMO
-    [Go to demo](https://drvn-challenge.netlify.app/)
+[Go to demo](https://drvn-challenge.netlify.app/)
 
 # DrvnChallenge
 
