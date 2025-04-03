@@ -12,7 +12,11 @@ export default class CurrencyService {
 
     public currency$: Observable<Currency> = this.currentCurrency.asObservable()
 
-    constructor() { }
+    constructor() {
+        if (localStorage.getItem("currency") === '' || localStorage.getItem("currency") === null) {
+            localStorage.setItem("currency", Currency.USD)
+        }
+     }
 
     public getCurrency(): Currency {
         return localStorage.getItem("currency") as Currency
