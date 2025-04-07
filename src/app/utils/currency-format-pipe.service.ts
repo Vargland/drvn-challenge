@@ -14,6 +14,6 @@ export default class CurrencyFormatPipe implements PipeTransform {
     const converted = this.currencyService.convertToSelected(price, this.currencyService.getCurrency())
     const symbol = this.currencyService.getCurrencySymbol()
 
-    return converted ? `${symbol} ${converted.toFixed(1)}` : `${symbol} ${converted}`
+    return converted ? `${symbol} ${converted.toFixed(2)}` : `${symbol} ${converted}`
   }
 }
