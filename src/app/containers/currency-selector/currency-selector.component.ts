@@ -20,9 +20,7 @@ export default class CurrencySelectorComponent {
     public usd = Currency.USD
 
     public ngOnInit(): void {
-        this.currencyService.currency$.subscribe(currency => {
-            this.selectedCurrency = currency
-        })
+        this.selectedCurrency = this.currencyService.getCurrency()
     }
 
     public onCurrencyChange(): void {

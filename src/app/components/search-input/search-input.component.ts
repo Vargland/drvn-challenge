@@ -13,8 +13,6 @@ export default class SearchInputComponent {
   public search = output<string>()
 
   public onSearch() {
-    if (this.searchValue().trim()) {
-      this.search.emit(this.searchValue())
-    }
+    this.search.emit(this.searchValue())
   }
 }
